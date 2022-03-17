@@ -1,0 +1,71 @@
+[gd_scene load_steps=14 format=2]
+
+[ext_resource path="res://src/Enemies/EnnemyBase.tscn" type="PackedScene" id=1]
+[ext_resource path="res://assets/space_shooter_pack/Graphics/spritesheets/explosion.png" type="Texture" id=2]
+[ext_resource path="res://src/Enemies/EnnemySmall.gd" type="Script" id=3]
+[ext_resource path="res://assets/space_shooter_pack/Graphics/spritesheets/enemy-small.png" type="Texture" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 4 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 4 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 2 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 2 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 2 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 2 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 2 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "death",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 6.34822
+height = 3.30356
+
+[node name="EnnemySmall" instance=ExtResource( 1 )]
+position = Vector2( 0, -2 )
+script = ExtResource( 3 )
+
+[node name="Sprite" parent="." index="0"]
+frames = SubResource( 8 )
+frame = 1
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, 1.65178 )
+rotation = 1.5708
+shape = SubResource( 9 )
+
+[node name="VisibilityNotifier2D" parent="." index="2"]
+position = Vector2( 0, -2.38419e-07 )
+scale = Vector2( 0.8, 0.8 )
+
+[node name="ShotTimer" parent="." index="3"]
+wait_time = 100.0

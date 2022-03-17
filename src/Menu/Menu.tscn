@@ -1,0 +1,102 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://ressources/Text.tres" type="DynamicFont" id=1]
+[ext_resource path="res://src/Menu/Menu.gd" type="Script" id=2]
+[ext_resource path="res://ressources/Title.tres" type="DynamicFont" id=3]
+
+[sub_resource type="StyleBoxEmpty" id=1]
+
+[sub_resource type="InputEventAction" id=2]
+action = "ui_accept"
+
+[sub_resource type="ShortCut" id=3]
+shortcut = SubResource( 2 )
+
+[node name="Menu" type="Popup"]
+margin_right = 256.0
+margin_bottom = 256.0
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Title" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -90.0
+margin_top = -87.5
+margin_right = 90.0
+margin_bottom = -36.5
+custom_fonts/font = ExtResource( 3 )
+text = "Spaceship shooter"
+align = 1
+autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="GameOver" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = -13.5
+margin_bottom = 1.5
+rect_pivot_offset = Vector2( 151.749, 15 )
+custom_fonts/font = ExtResource( 1 )
+text = "Game over"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Score" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 5.0
+margin_bottom = 19.0
+custom_fonts/font = ExtResource( 1 )
+text = "Score"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Best" type="Label" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 23.0
+margin_bottom = 37.0
+custom_fonts/font = ExtResource( 1 )
+text = "BEST"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StartButton" type="Button" parent="."]
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_top = 67.0
+margin_bottom = 81.0
+custom_styles/focus = SubResource( 1 )
+custom_fonts/font = ExtResource( 1 )
+shortcut_in_tooltip = false
+button_mask = 0
+shortcut = SubResource( 3 )
+text = "Press enter to play"
+flat = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="BlinkingTimer" type="Timer" parent="StartButton"]
+wait_time = 0.5
+autostart = true
+
+[connection signal="pressed" from="StartButton" to="." method="_on_StartButton_pressed"]
+[connection signal="timeout" from="StartButton/BlinkingTimer" to="." method="_on_BlinkingTextTimer_timeout"]

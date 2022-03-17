@@ -1,0 +1,32 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/Enemies/EnnemyBase.gd" type="Script" id=1]
+[ext_resource path="res://src/PowerUp/PowerUp.tscn" type="PackedScene" id=2]
+[ext_resource path="res://src/Bullets/BulletEnnemy.tscn" type="PackedScene" id=3]
+
+[node name="EnnemyBase" type="KinematicBody2D" groups=[
+"Ennemies",
+"GameElements",
+]]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true
+}
+Bullet = ExtResource( 3 )
+PowerUp = ExtResource( 2 )
+
+[node name="Sprite" type="AnimatedSprite" parent="."]
+playing = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+disabled = true
+
+[node name="VisibilityNotifier2D" type="VisibilityNotifier2D" parent="."]
+
+[node name="ShotTimer" type="Timer" parent="."]
+
+[node name="ShootPosition" type="Position2D" parent="."]
+
+[connection signal="animation_finished" from="Sprite" to="." method="_on_Sprite_animation_finished"]
+[connection signal="screen_entered" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_entered"]
+[connection signal="screen_exited" from="VisibilityNotifier2D" to="." method="_on_VisibilityNotifier2D_screen_exited"]

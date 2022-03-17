@@ -1,0 +1,34 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://src/WebLaunch/WebLaunch.gd" type="Script" id=1]
+[ext_resource path="res://ressources/Text.tres" type="DynamicFont" id=2]
+[ext_resource path="res://src/Main/Main.tscn" type="PackedScene" id=3]
+
+[node name="WebLaunch" type="Node"]
+script = ExtResource( 1 )
+Game = ExtResource( 3 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_right = 256.0
+margin_bottom = 256.0
+color = Color( 0, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -103.5
+margin_top = -7.0
+margin_right = 103.5
+margin_bottom = 7.0
+size_flags_horizontal = 4
+custom_fonts/font = ExtResource( 2 )
+text = "Click anywhere to begin"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}

@@ -1,0 +1,91 @@
+[gd_scene load_steps=15 format=2]
+
+[ext_resource path="res://assets/space_shooter_pack/Graphics/spritesheets/enemy-big.png" type="Texture" id=1]
+[ext_resource path="res://src/Enemies/EnnemyBase.tscn" type="PackedScene" id=2]
+[ext_resource path="res://assets/space_shooter_pack/Graphics/spritesheets/explosion.png" type="Texture" id=3]
+[ext_resource path="res://src/Enemies/EnnemyBig.gd" type="Script" id=4]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 32, 0, 32, 32 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 3 )
+region = Rect2( 0, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 3 )
+region = Rect2( 16, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=5]
+atlas = ExtResource( 3 )
+region = Rect2( 32, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=6]
+atlas = ExtResource( 3 )
+region = Rect2( 48, 0, 16, 16 )
+
+[sub_resource type="AtlasTexture" id=7]
+atlas = ExtResource( 3 )
+region = Rect2( 64, 0, 16, 16 )
+
+[sub_resource type="SpriteFrames" id=8]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 10.0
+}, {
+"frames": [ SubResource( 3 ), SubResource( 4 ), SubResource( 5 ), SubResource( 6 ), SubResource( 7 ) ],
+"loop": true,
+"name": "death",
+"speed": 10.0
+} ]
+
+[sub_resource type="CapsuleShape2D" id=9]
+radius = 13.0
+height = 0.0
+
+[sub_resource type="Curve2D" id=10]
+_data = {
+"points": PoolVector2Array( 0, 0, 0, 0, -14.0317, 5.93619, 0, 0, 0, 0, -12, 11.8333, 0, 0, 0, 0, -8, 16, 0, 0, 0, 0, -4, 13.5, 0, 0, 0, 0, 0, 15, 0, 0, 0, 0, 4, 13.5, 0, 0, 0, 0, 7, 16, 0, 0, 0, 0, 12, 12.6667, 0, 0, 0, 0, 14, 6, 0, 0, 0, 0, 11.1529, -2.88083, 0, 0, 0, 0, -11.1203, -2.83949, 0, 0, 0, 0, -14.0317, 5.93619 )
+}
+
+[node name="EnnemyBig" instance=ExtResource( 2 )]
+position = Vector2( 0, -6 )
+script = ExtResource( 4 )
+
+[node name="Sprite" parent="." index="0"]
+frames = SubResource( 8 )
+frame = 1
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2( 0, 4 )
+shape = SubResource( 9 )
+
+[node name="VisibilityNotifier2D" parent="." index="2"]
+position = Vector2( -0.015834, 0.968627 )
+scale = Vector2( 1.40158, 1.50314 )
+
+[node name="ShotTimer" parent="." index="3"]
+wait_time = 0.5
+
+[node name="ShootPosition" parent="." index="4"]
+position = Vector2( 0, 15 )
+
+[node name="ShootPath" type="Path2D" parent="." index="5"]
+position = Vector2( 0, -1.1 )
+scale = Vector2( 1, 1.2 )
+curve = SubResource( 10 )
+
+[node name="PathFollow" type="PathFollow2D" parent="ShootPath" index="0"]
+position = Vector2( -14.0317, 5.93619 )
+rotation = 1.2673
+rotate = false
+
+[connection signal="died" from="." to="." method="_on_EnnemyBig_died"]
+[connection signal="timeout" from="ShotTimer" to="." method="_on_ShotTimer_timeout"]
